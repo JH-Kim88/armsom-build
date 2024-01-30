@@ -132,6 +132,12 @@ for type in $target; do
                 cp ${overlay_dir}/etc/udev/rules.d/99-gdm-hack.rules ${chroot_dir}/etc/udev/rules.d/99-gdm-hack.rules
 
                 chroot ${chroot_dir} /bin/bash -c "apt-get -y install libwidevinecdm librockchip-mpp1 librockchip-mpp-dev librockchip-vpu0 libv4l-rkmpp librist-dev librist4 librga2 librga-dev rist-tools rockchip-mpp-demos rockchip-multimedia-config gstreamer1.0-rockchip1 chromium-browser mali-g610-firmware malirun"
+
+                # install libmali
+                cp -r ../packages/libmali/libmali-*_arm64.deb ${chroot_dir}/opt
+                cp ${overlay_dir}/etc/init.d/rockchip.sh ${chroot_dir}/etc/init.d/rockchip.sh
+                cp ${overlay_dir}/usr/lib/systemd/system/rockchip.service ${chroot_dir}/usr/lib/systemd/system/rockchip.service
+                chroot ${chroot_dir} /bin/bash -c "systemctl enable rockchip"
             else
                 chroot ${chroot_dir} /bin/bash -c "apt-get -y install libwidevinecdm rockchip-multimedia-config chromium-browser"
             fi
