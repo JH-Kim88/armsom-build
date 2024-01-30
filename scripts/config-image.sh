@@ -123,6 +123,9 @@ for type in $target; do
                 chroot ${chroot_dir} /bin/bash -c "dpkg -i /tmp/camera_engine_rkisp-v2.2.0_arm64.deb"
                 rm -f ${chroot_dir}/tmp/camera_engine_*_arm64.deb
 
+                cp ${overlay_dir}/usr/lib/librkaiq.so ${chroot_dir}/usr/lib/librkaiq.so
+                cp ${overlay_dir}/usr/bin/rkaiq_3A_server ${chroot_dir}/usr/bin/rkaiq_3A_server
+
                 # Hack for GDM to restart on first HDMI hotplug
                 mkdir -p ${chroot_dir}/usr/lib/scripts
                 cp ${overlay_dir}/usr/lib/scripts/gdm-hack.sh ${chroot_dir}/usr/lib/scripts/gdm-hack.sh
